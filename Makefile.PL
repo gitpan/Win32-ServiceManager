@@ -16,14 +16,18 @@ my %WriteMakefileArgs = (
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Win32-ServiceManager",
-  "EXE_FILES" => [],
+  "EXE_FILES" => [
+    "bin/nssm_32.exe",
+    "bin/nssm_64.exe"
+  ],
   "LICENSE" => "perl",
   "NAME" => "Win32::ServiceManager",
   "PREREQ_PM" => {
     "IPC::System::Simple" => "1.21",
-    "Moo" => "1.000007"
+    "Moo" => "1.000007",
+    "Test::Deep" => "0.110"
   },
-  "VERSION" => "0.001000",
+  "VERSION" => "0.001001",
   "test" => {
     "TESTS" => "t/*.t"
   }

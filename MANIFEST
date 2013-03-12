@@ -5,6 +5,8 @@ META.json
 META.yml
 Makefile.PL
 README
+bin/nssm_32.exe
+bin/nssm_64.exe
 dist.ini
 lib/Win32/ServiceManager.pm
 t/basic.t

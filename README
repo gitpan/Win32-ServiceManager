@@ -2,7 +2,7 @@ NAME
     Win32::ServiceManager - Manage Windows Services
 
 VERSION
-    version 0.001000
+    version 0.001001
 
 SYNOPSIS
      use Win32::ServiceManager;
@@ -133,7 +133,12 @@ ATTRIBUTES
     it allows for restarts, for example.
 
   nssm_path
-    Set this to the path to nssm (default is just 'nssm.exe').
+    Set this to the path to nssm (default is just "nssm_64.exe", or
+    "nssm_32.exe" if you set "nssm_bits" to 32).
+
+  nssm_bits
+    "nssm" comes in both 32 and 64 bit flavors. This specifies when of the
+    bundled "nssm" binaries to use. (default is 64)
 
 nssm
     nssm <http://nssm.cc> is a handy service wrapper for Windows. Instead of
