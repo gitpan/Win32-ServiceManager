@@ -17,22 +17,41 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "Win32-ServiceManager",
   "EXE_FILES" => [
-    "bin/nssm_32.exe",
-    "bin/nssm_64.exe"
+    "bin/nssm_64.exe",
+    "bin/nssm_32.exe"
   ],
   "LICENSE" => "perl",
   "NAME" => "Win32::ServiceManager",
   "PREREQ_PM" => {
     "IPC::System::Simple" => "1.21",
+    "List::Util" => 0,
     "Moo" => "1.000007",
-    "Test::Deep" => "0.110"
+    "Syntax::Keyword::Junction" => 0,
+    "Time::HiRes" => 0,
+    "Win32::Service" => 0
   },
-  "VERSION" => "0.001001",
+  "TEST_REQUIRES" => {
+    "Test::Deep" => "0.11"
+  },
+  "VERSION" => "0.002000",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
