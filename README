@@ -2,7 +2,7 @@ NAME
     Win32::ServiceManager - Manage Windows Services
 
 VERSION
-    version 0.002000
+    version 0.002001
 
 SYNOPSIS
      use Win32::ServiceManager;
@@ -151,6 +151,11 @@ METHODS
     Returns the status info about the specified service. The status info is
     a hash containing the following keys:
 
+    Note that for reasons unknown to me the underlying win32 "GetStatus"
+    call fails when restarting services, so I added a retry counter. If you
+    are interested in finding out when and how seriously your services fail
+    the count, turn on "warnings".
+
     * "current_state"
 
       Can be any of the following
@@ -225,6 +230,10 @@ ATTRIBUTES
   nssm_bits
     "nssm" comes in both 32 and 64 bit flavors. This specifies when of the
     bundled "nssm" binaries to use. (default is 64)
+
+  warnings
+    Set this to true to get warnings for non-serious failures. Currently the
+    only such warning is in "get_status".
 
 nssm
     nssm <http://nssm.cc> is a handy service wrapper for Windows. Instead of

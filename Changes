@@ -1,5 +1,8 @@
 Revision history for Win32-ServiceManager
 
+0.002001  2013-10-22 16:48:29 America/Chicago
+ - workaround get_status failing sometimes
+
 0.002000  2013-10-22 11:57:47 America/Chicago
  - add (default on) idempotent option
  - refactor start and stop_service methods to use Win32::Service instead of
