@@ -1,8 +1,5 @@
 package Win32::ServiceManager;
-{
-  $Win32::ServiceManager::VERSION = '0.002001';
-}
-
+$Win32::ServiceManager::VERSION = '0.002002';
 # ABSTRACT: Manage Windows Services
 
 use Moo;
@@ -73,7 +70,7 @@ sub _depends {
 
 sub _sc_failure { qw(sc failure), $_[1], 'reset= 60', 'actions= restart/60000' }
 
-sub _sc_description { qw(sc description), $_[1], $_[2] }
+sub _sc_description { qw(sc description), $_[1], qq("$_[2]") }
 
 sub create_service {
    my ($self, %args) = @_;
@@ -225,7 +222,7 @@ sub get_status {
    my $x;
    for (1..1_000) {
       GetStatus('', $name, \%ret) and last;
-      $x = $_;
+      $x = $_ + 1;
       sleep 0.05;
    }
 
@@ -258,13 +255,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Win32::ServiceManager - Manage Windows Services
 
 =head1 VERSION
 
-version 0.002001
+version 0.002002
 
 =head1 SYNOPSIS
 
@@ -594,7 +593,7 @@ Arthur Axel "fREW" Schmidt <frioux+cpan@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Arthur Axel "fREW" Schmidt.
+This software is copyright (c) 2014 by Arthur Axel "fREW" Schmidt.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
